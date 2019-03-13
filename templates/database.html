@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>database</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div name="table" class="col-md-6" style="float:left">
+    <br><br>
+    <div style="height: 800px">
+        <table class="table table-bordered">
+            <caption class="text-center" style="font-size: 30px;">
+                数据库列表
+            </caption>
+            <thead>
+            <th class="text-center" id="th0">爬虫名称</th>
+            <th class="text-center as" id="th1" onclick="SortTable(this)">创建时间</th>
+            </thead>
+            <tbody class="text-center" id="table0">
+            {% for item in table %}
+                <tr height="10px">
+                    <td width="40%" name="td0">
+                        <a href="/table/{{item.spider_id}}" target="_blank">
+                            {{item.chinese_name}}
+                        </a>
+                    </td>
+                    <td width="60%" name="td1">
+                        {{ item.date_time }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="text-align:center">
+        <button class="btn btn-default" id="spanFirst">第一页</button>
+        <button class="btn btn-default" id="spanPre">上一页</button>
+        <button class="btn btn-default" id="spanNext">下一页</button>
+        <button class="btn btn-default" id="spanLast">最后一页</button>
+        第<span id="spanPageNum"></span>页/
+        共<span id="spanTotalPage"></span>页
+    </div>
+    <script src="/static/table_page.js" id="size" data="16"></script>
+    <script src="/static/table_sort.js"></script>
+</div>
+
+<div name="count" class="col-md-6" style="float:right;margin-top: 8%">
+    <div class="row">
+        <br>
+        <h2 style="text-align:center">七天评论统计</h2>
+        <br>
+        <form class="form-horizontal" role="form" method="POST">
+            <lable class="col-md-2"></lable>
+            <label class="col-md-2 control-label" for="name">选择列表</label>
+            <div class="col-md-4">
+                <select class="form-control" name="spider_id">
+                    {% for item in table %}
+                        <option>{{ item.chinese_name }}{{ item.date_time }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        {% if flag %}
+            <div class="col-md-2"></div>
+            <div id="container" class="col-md-8"></div>
+            <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+            <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+            <script src="/static/highcharts.js" id="count" data={{ data }}></script>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+
+</html>

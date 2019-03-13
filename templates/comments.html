@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>comments</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+<table class="table table-bordered">
+    <caption class="text-center" style="font-size: 30px;">
+        评价列表
+    </caption>
+    <thead>
+        <th class="text-center as" id="th1" onclick="SortTable(this)">评价时间</th>
+        <th class="text-center" id="th0">评价内容</th>
+    </thead>
+    <tbody id="table0">
+    {% for comment in comments %}
+        <tr height="60px">
+            <td width="15%" class="text-center" name="td1">{{comment.date_time}}</td>
+            <td width="85%" name="td0">
+                <div style="height:60px;overflow-y:auto">{{comment.comment}}</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div style="text-align:center;">
+    <button class="btn btn-default" id="spanFirst">第一页</button>
+    <button class="btn btn-default" id="spanPre">上一页</button>
+    <button class="btn btn-default" id="spanNext">下一页</button>
+    <button class="btn btn-default" id="spanLast">最后一页</button>
+    第<span id="spanPageNum"></span>页/
+    共<span id="spanTotalPage"></span>页
+</div>
+<script src="/static/table_page.js" id="size" data="10"></script>
+<script src="/static/table_sort.js"></script>
+</body>
+</html>

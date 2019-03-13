@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>item</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+<table class="table table-bordered">
+    <caption class="text-center" style="font-size: 30px;">
+        商品列表
+    </caption>
+    <thead>
+        <th class="text-center">商品名</th>
+        <th class="text-center">好评率</th>
+        <th class="text-center">好评</th>
+        <th class="text-center">中评</th>
+        <th class="text-center">差评</th>
+        <th class="text-center">热门评价</th>
+    </thead>
+    <tbody  id="table0">
+    {% for item in items %}
+        <tr height="60px">
+            <td width="30%">
+                <a href="/item/{{ spider_id }}/{{ item.id }}" target="_blank">
+                    {{item.item_name}}
+                </a>
+            </td>
+            <td width="6%" class="text-center">{{item.good_rate}}</td>
+            <td width="6%" class="text-center">{{item.good_count}}</td>
+            <td width="6%" class="text-center">{{item.general_count}}</td>
+            <td width="6%" class="text-center">{{item.poor_count}}</td>
+            <td width="30%">
+                <div style="height:60px;overflow-y:auto">{{item.hot_comment}}</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div style="text-align:center;">
+    <button class="btn btn-default" id="spanFirst">第一页</button>
+    <button class="btn btn-default" id="spanPre">上一页</button>
+    <button class="btn btn-default" id="spanNext">下一页</button>
+    <button class="btn btn-default" id="spanLast">最后一页</button>
+    第<span id="spanPageNum"></span>页/
+    共<span id="spanTotalPage"></span>页
+</div>
+<script src="/static/table_page.js" id="size" data="10"></script>
+</body>
+
+</html>
